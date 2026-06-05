@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Opportunités Travel — Juin 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #f5f0e8;
+    --terracotta: #c4674a;
+    --deep: #1a1410;
+    --warm: #8b6f5e;
+    --gold: #d4a853;
+    --cream: #faf7f2;
+    --muted: #6b5c52;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--deep);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  .hero {
+    background: var(--deep);
+    padding: 60px 24px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(196,103,74,0.25) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 20%, rgba(212,168,83,0.15) 0%, transparent 50%);
+  }
+
+  .hero-tag {
+    display: inline-block;
+    border: 1px solid var(--terracotta);
+    color: var(--terracotta);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 8vw, 56px);
+    color: var(--sand);
+    line-height: 1.1;
+    position: relative;
+    margin-bottom: 12px;
+  }
+
+  .hero h1 em {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .hero-sub {
+    color: var(--warm);
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    position: relative;
+    margin-bottom: 8px;
+  }
+
+  .hero-urgency {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(196,103,74,0.15);
+    border: 1px solid rgba(196,103,74,0.3);
+    color: #e8896e;
+    font-size: 12px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    position: relative;
+    margin-top: 16px;
+  }
+
+  .pulse {
+    width: 6px; height: 6px;
+    background: var(--terracotta);
+    border-radius: 50%;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.6; }
+  }
+
+  .section-header {
+    padding: 40px 20px 20px;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 6px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--deep);
+  }
+
+  .cards {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px 22px;
+    text-decoration: none;
+    color: var(--deep);
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    border: 1px solid rgba(139,111,94,0.12);
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 0.4s ease both;
+  }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--terracotta);
+    transform: scaleY(0);
+    transition: transform 0.25s ease;
+    transform-origin: bottom;
+  }
+
+  .card:hover {
+    transform: translateX(4px);
+    border-color: rgba(196,103,74,0.25);
+    box-shadow: 0 8px 30px rgba(26,20,16,0.08);
+  }
+
+  .card:hover::after { transform: scaleY(1); }
+
+  .card-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .card-body { flex: 1; min-width: 0; }
+
+  .card-brand {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 3px;
+  }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    line-height: 1.3;
+    color: var(--deep);
+    margin-bottom: 6px;
+  }
+
+  .card-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  }
+
+  .badge-deadline {
+    background: #fef3f0;
+    color: var(--terracotta);
+    border: 1px solid rgba(196,103,74,0.2);
+  }
+
+  .badge-type {
+    background: var(--sand);
+    color: var(--warm);
+  }
+
+  .badge-ongoing {
+    background: #f0f7f0;
+    color: #4a8c5c;
+    border: 1px solid rgba(74,140,92,0.2);
+  }
+
+  .arrow {
+    margin-left: auto;
+    color: var(--terracotta);
+    font-size: 18px;
+    flex-shrink: 0;
+    align-self: center;
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: all 0.25s ease;
+  }
+
+  .card:hover .arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .divider {
+    max-width: 680px;
+    margin: 16px auto;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(139,111,94,0.15);
+  }
+
+  .divider-text {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .cta-block {
+    max-width: 680px;
+    margin: 24px auto 60px;
+    padding: 0 16px;
+  }
+
+  .cta-card {
+    background: var(--deep);
+    border-radius: 20px;
+    padding: 32px 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(196,103,74,0.3) 0%, transparent 60%);
+  }
+
+  .cta-card h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--sand);
+    font-size: 22px;
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  .cta-card p {
+    color: var(--warm);
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 22px;
+    position: relative;
+  }
+
+  .cta-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+    position: relative;
+    text-align: left;
+  }
+
+  .cta-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #c8b8ae;
+    font-size: 13px;
+  }
+
+  .cta-item span:first-child {
+    color: var(--gold);
+    font-size: 15px;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: var(--terracotta);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    padding: 14px 32px;
+    border-radius: 12px;
+    text-decoration: none;
+    position: relative;
+    transition: all 0.2s ease;
+  }
+
+  .cta-btn:hover {
+    background: #b5593e;
+    transform: translateY(-1px);
+  }
+
+  footer {
+    text-align: center;
+    padding: 20px;
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .cards .card:nth-child(1) { animation-delay: 0.05s; }
+  .cards .card:nth-child(2) { animation-delay: 0.1s; }
+  .cards .card:nth-child(3) { animation-delay: 0.15s; }
+  .cards .card:nth-child(4) { animation-delay: 0.2s; }
+  .cards .card:nth-child(5) { animation-delay: 0.25s; }
+  .cards .card:nth-child(6) { animation-delay: 0.3s; }
+  .cards .card:nth-child(7) { animation-delay: 0.35s; }
+  .cards .card:nth-child(8) { animation-delay: 0.4s; }
+  .cards .card:nth-child(9) { animation-delay: 0.45s; }
+  .cards .card:nth-child(10) { animation-delay: 0.5s; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">✈️ Sélectionné pour les Créateurs</div>
+  <h1>Opportunités <em>Travel</em><br>Juin 2026</h1>
+  <p class="hero-sub">Worldwide — Collabs, UGC, Press Trips & Jobs</p>
+  <div class="hero-urgency">
+    <div class="pulse"></div>
+    La plupart des deadlines : fin juin — Candidatez maintenant !
+  </div>
+</div>
+
+<!-- DEPUIS LE POST IG -->
+<div class="section-header">
+  <div class="section-label">📸 Depuis notre post Instagram</div>
+  <div class="section-title">Opportunités en vedette</div>
+</div>
+
+<div class="cards">
+
+  <a class="card" href="https://forms.office.com/pages/responsepage.aspx?id=VGT2dbV5_U6CMwNJtBJgfKwNX3kVX1xPvOJGs9S1zI9UQlFKRDlFWU8wNDFQOFhXNUFNSFI1NElFMC4u&fbclid=PAZXh0bgNhZW0DMTAwAHNydGMGYXBwX2lkDzkzNjYxOTc0MzM5MjQ1OQABp3AJTj7XheLkfQT79xcazMqczKOWsU8ggCdzu9_gCUJq2xdvovd1fBzwAm11_aem_Et9po0ZCV71Ut63gvq3tEw&route=shorturl" target="_blank">
+    <div class="card-icon" style="background:#fff3ee;">🌍</div>
+    <div class="card-body">
+      <div class="card-brand">Agoda</div>
+      <div class="card-title">Être payé·e pour créer du contenu travel avec Agoda</div>
+      <div class="card-desc">Deviens Ambassadeur Agoda — gagne de l'argent en voyageant et en créant du contenu pour l'une des plus grandes plateformes de voyage en Asie.</div>
+      <div class="card-footer">
+        <span class="badge badge-deadline">⏰ Fin juin</span>
+        <span class="badge badge-type">Collab rémunérée</span>
+      </div>
+    </div>
+    <div class="arrow">→</div>
+  </a>
+
+  <a class="card" href="https://creators.withairbnb.com/splash" target="_blank">
+    <div class="card-icon" style="background:#fff0f0;">🏡</div>
+    <div class="card-body">
+      <div class="card-brand">Airbnb</div>
+      <div class="card-title">Collaborer avec Airbnb — Être payé·e pour partager des logements & expériences</div>
+      <div class="card-desc">Partage des logements et expériences Airbnb, sois rémunéré·e et accède à des campagnes exclusives et des avantages créateurs.</div>
+      <div class="card-footer">
+        <span class="badge badge-ongoing">✅ Ongoing</span>
+        <span class="badge badge-type">Affiliation + UGC</span>
+      </div>
+    </div>
+    <div class="arrow">→</div>
+  </a>
+
+  <a class="card" href="https://www.instagram.com/p/DYivdfZJizU/?igsh=eW5jNjhzdjNrY2Fl" target="_blank">
+    <div class="card-icon" style="background:#fff8ee;">☕</div>
+    <div class="card-body">
+      <div class="card-brand">Hazel Espresso</div>
+      <div class="card-title">Poste Social Media & Contenu — Le job rêvé pour les amoureux du café</div>
+      <div class="card-desc">Poste de Social Media Coordinator : création de contenu, Reels, photographie et community management dans une marque café très esthétique.</div>
+      <div class="card-footer">
+        <span class="badge badge-deadline">⏰ Fin juin</span>
+        <span class="badge badge-type">Job</span>
+      </div>
+    </div>
+    <div class="arrow">→</div>
+  </a>
+
+  <a class="card" href="https://www.instagram.com/p/DYMCybtCkEQ/?igsh=dGdqaDQ5YWRmNDE5" target="_blank">
+    <div class="card-icon" style="background:#f0f8ff;">🌊</div>
+    <div class="card-body">
+      <div class="card-brand">Dive the Difference × Urban Nomad</div>
+      <div class="card-title">Stage de rêve — Surf, Plongée & Vie sur une île</div>
+      <div class="card-desc">Stage dans un resort de plongée PADI 5★ et village de surf. Postes disponibles : marketing & médias, hospitalité, événements, opérations. Candidature par email.</div>
+      <div class="card-footer">
+        <span class="badge badge-deadline">⏰ Fin juin</span>
+        <span class="badge badge-type">Stage</span>
+      </div>
+    </div>
+    <div class="arrow">→</div>
+  </a>
+
+  <a class="card" href="https://www.instagram.com/p/DYWlq0mKn2R/?igsh=MWI4ZTd4eDZldmM5Nw%3D%3D" target="_blank">
+    <div class="card-icon" style="background:#f5fff5;">🐾</div>
+    <div class="card-body">
+      <div class="card-brand">Unwritten</div>
+      <div class="card-title">Opportunité UGC pour créateurs de contenu chiens & animaux (UK)</div>
+      <div class="card-desc">Créateurs spécialisés dans le contenu pet/chien recherchés pour une campagne UGC esthétique. Basé au Royaume-Uni.</div>
+      <div class="card-footer">
+        <span class="badge badge-deadline">⏰ Fin juin</span>
+        <span class="badge badge-type">UGC</span>
+      </div>
+    </div>
+    <div class="arrow">→</div>
+  </a>
+
+  <a class="card" href="https://www.instagram.com/p/DYpbSm6kc9v/?igsh=eGk1amxycnAwOGc4" target="_blank">
+    <div class="card-icon" style="background:#fff8f0;">🏖️</div>
+    <div class="card-body">
+      <div class="card-brand">Aubamar Palma Resort</div>
+      <div class="card-title">Gagnez un séjour luxe 2 nuits pour deux personnes</div>
+      <div class="card-desc">Concours : un séjour luxe de 2 nuits pour 2 personnes à l'Aubamar Palma Resort à gagner. Candidatez avant le 19 juin !</div>
+      <div class="card-footer">
+        <span class="badge badge-deadline">⚡ 19 juin</span>
+        <span class="badge badge-type">Concours</span>
+      </div>
+    </div>
+    <div class="arrow">→</div>
+  </a>
+
+  <a class="card" href="https://www.instagram.com/p/DYsjQ5xiygq/?igsh=MWMxMm91bmxkYWdkdg%3D%3D" target="_blank">
+    <div class="card-icon" style="background:#f5fff8;">🌿</div>
+    <div class="card-body">
+      <div class="card-brand">Glamping plein air</div>
+      <div class="card-title">Appel à photographes & créateurs UGC — Séjour outdoor de rêve</div>
+      <div class="card-desc">Un établissement de glamping luxe recherche des photographes et créateurs de contenu pour un séjour nature et poétique.</div>
+      <div class="card-footer">
+        <span class="badge badge-deadline">⏰ Fin juin</span>
+        <span class="badge badge-type">UGC / Photo</span>
+      </div>
+    </div>
+    <div class="arrow">→</div>
+  </a>
+
+</div>
+
+<div class="divider">
+  <div class="divider-line"></div>
+  <div class="divider-text">Encore plus d'opportunités</div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- PLUS D'OPPORTUNITES -->
+<div class="section-header" style="padding-top:10px;">
+  <div class="section-label">🌐 Bonus — Worldwide</div>
+  <div class="section-title">D'autres opportunités à saisir</div>
+</div>
+
+<div class="cards">
+
+  <a class="card" href="https://docs.google.com/forms/d/e/1FAIpQLScGC3vA-8cTluFVBPbQR7OQ-pTQhJrnXRlf4lunDz3uc11HHw/viewform" target="_blank">
+    <div class="card-icon" style="background:#f5f5ff;">✍️</div>
+    <div class="card-body">
+      <div class="card-brand">Business Insider</div>
+      <div class="card-title">Recherche de contributeurs freelance — Lifestyle & Voyage</div>
+      <div class="card-desc">Business Insider recrute des rédacteurs freelance pour des articles de voyage et lifestyle. Candidature via Google Form.</div>
+      <div class="card-footer">
+        <span class="badge badge-type">Rédaction</span>
+        <span class="badge badge-ongoing">Freelance</span>
+      </div>
+    </div>
+    <div class="arrow">→</div>
+  </a>
+
+  <a class="card" href="https://www.instagram.com/p/DYkIIv2FSL0/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ==" target="_blank">
+    <div class="card-icon" style="background:#fff5f8;">💰</div>
+    <div class="card-body">
+      <div class="card-brand">Ori Magazine</div>
+      <div class="card-title">Bourse de 5 000 $ pour la narration féminine de voyage</div>
+      <div class="card-desc">Ori Magazine propose une bourse de 5 000 $ pour les femmes storytellers du voyage. Une opportunité rare de financement pour les créatrices.</div>
+      <div class="card-footer">
+        <span class="badge badge-deadline">⏰ Deadline juin</span>
+        <span class="badge badge-type">Bourse</span>
+      </div>
+    </div>
+    <div class="arrow">→</div>
+  </a>
+
+  <a class="card" href="https://classpass.com/?irgwc=1&afsrc=1&irclickid=S9XSvL3whxyZTFLUNSXbv1OXUkuWoLQAtWHuU80&Sharedid=&PartnerName=Classpass%20Creator" target="_blank">
+    <div class="card-icon" style="background:#f0fff8;">🧘</div>
+    <div class="card-body">
+      <div class="card-brand">ClassPass</div>
+      <div class="card-title">2 semaines d'accès gratuit mondial — Pilates, Yoga & Plus</div>
+      <div class="card-desc">Opportunité bien-être : 2 semaines d'accès gratuit à des cours de Pilates, yoga et fitness partout dans le monde pour les créateurs.</div>
+      <div class="card-footer">
+        <span class="badge badge-ongoing">✅ Accès gratuit</span>
+        <span class="badge badge-type">Bien-être</span>
+      </div>
+    </div>
+    <div class="arrow">→</div>
+  </a>
+
+  <a class="card" href="https://www.instagram.com/p/DYmQr-bkXhc/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ==" target="_blank">
+    <div class="card-icon" style="background:#fff8ee;">🎾</div>
+    <div class="card-body">
+      <div class="card-brand">Summer Camp — Portugal</div>
+      <div class="card-title">Recherche vidéaste, coach de tennis & sound healer</div>
+      <div class="card-desc">Un summer camp au Portugal recherche un vidéaste, un coach de tennis et un sound healer. Logement sur place inclus.</div>
+      <div class="card-footer">
+        <span class="badge badge-deadline">⏰ Fin juin</span>
+        <span class="badge badge-type">Job / Logé</span>
+      </div>
+    </div>
+    <div class="arrow">→</div>
+  </a>
+
+  <a class="card" href="https://www.instagram.com/p/DYjYzK2DSqA/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ==" target="_blank">
+    <div class="card-icon" style="background:#f5fff5;">🌱</div>
+    <div class="card-body">
+      <div class="card-brand">Éco-Village — France</div>
+      <div class="card-title">Programme de bénévolat 5 mois dans un éco-village en France</div>
+      <div class="card-desc">Programme de bénévolat de 5 mois dans un éco-village en France. Vie durable et contribution à un projet de communauté.</div>
+      <div class="card-footer">
+        <span class="badge badge-type">Bénévolat</span>
+        <span class="badge badge-type">France</span>
+      </div>
+    </div>
+    <div class="arrow">→</div>
+  </a>
+
+  <a class="card" href="https://www.going.com/write-for-us" target="_blank">
+    <div class="card-icon" style="background:#f5f5ff;">📝</div>
+    <div class="card-body">
+      <div class="card-brand">Going.com</div>
+      <div class="card-title">Opportunités de rédaction freelance</div>
+      <div class="card-desc">Going (ex-Scott's Cheap Flights) recrute des rédacteurs travel freelance. Opportunité remote, en continu.</div>
+      <div class="card-footer">
+        <span class="badge badge-ongoing">Ongoing</span>
+        <span class="badge badge-type">Rédaction / Remote</span>
+      </div>
+    </div>
+    <div class="arrow">→</div>
+  </a>
+
+  <a class="card" href="https://www.instagram.com/p/DYrAk-0lbtI/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ==" target="_blank">
+    <div class="card-icon" style="background:#fff8f0;">✈️</div>
+    <div class="card-body">
+      <div class="card-brand">F-ONE & MANERA</div>
+      <div class="card-title">Opportunité d'assistant marketing</div>
+      <div class="card-desc">Les marques de kitesurf et sports nautiques F-ONE et MANERA recherchent un assistant marketing. Idéal pour les créateurs de sports de glisse.</div>
+      <div class="card-footer">
+        <span class="badge badge-deadline">⏰ Fin juin</span>
+        <span class="badge badge-type">Job Marketing</span>
+      </div>
+    </div>
+    <div class="arrow">→</div>
+  </a>
+
+  <a class="card" href="https://www.instagram.com/p/DYHIeDjAmpe/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ==" target="_blank">
+    <div class="card-icon" style="background:#fff0f5;">🏨</div>
+    <div class="card-body">
+      <div class="card-brand">Radisson Hotels</div>
+      <div class="card-title">Programme Créateurs Hospitalité — Devenir créateur de contenu hôtelier</div>
+      <div class="card-desc">Radisson lance un programme créateurs dédié à l'hôtellerie. Deviens un créateur de contenu officiel pour la marque.</div>
+      <div class="card-footer">
+        <span class="badge badge-deadline">⏰ Deadline juin</span>
+        <span class="badge badge-type">Programme créateur</span>
+      </div>
+    </div>
+    <div class="arrow">→</div>
+  </a>
+
+  <a class="card" href="https://www.linkedin.com/jobs/view/4415121585/" target="_blank">
+    <div class="card-icon" style="background:#f0f5ff;">📸</div>
+    <div class="card-body">
+      <div class="card-brand">Airbnb</div>
+      <div class="card-title">Poste Lead Photo Creative — Équipe créative Airbnb</div>
+      <div class="card-desc">Airbnb recrute un·e Lead Photo Creative. Poste senior pour un directeur créatif visuel expérimenté.</div>
+      <div class="card-footer">
+        <span class="badge badge-type">Job LinkedIn</span>
+        <span class="badge badge-type">Créatif</span>
+      </div>
+    </div>
+    <div class="arrow">→</div>
+  </a>
+
+  <a class="card" href="https://recruiting2.ultipro.com/JOH1016JOUT/JobBoard/eb2b84bb-742d-4fc6-b8b2-e3348be4609c/OpportunityDetail?opportunityId=09c3a9f1-1ec2-4ce9-a163-d97a56930333" target="_blank">
+    <div class="card-icon" style="background:#fff8ee;">🤿</div>
+    <div class="card-body">
+      <div class="card-brand">Marque Plongée</div>
+      <div class="card-title">Content Marketing Manager — Plongée sous-marine</div>
+      <div class="card-desc">Poste de content marketing manager dans l'univers de la plongée. Parfait pour les passionné·es de l'océan avec des compétences marketing.</div>
+      <div class="card-footer">
+        <span class="badge badge-type">Job Marketing</span>
+      </div>
+    </div>
+    <div class="arrow">→</div>
+  </a>
+
+  <a class="card" href="https://jobs.jobvite.com/careers/dotdash/jobs" target="_blank">
+    <div class="card-icon" style="background:#f5f5ff;">🗺️</div>
+    <div class="card-body">
+      <div class="card-brand">Travel + Leisure / Dotdash</div>
+      <div class="card-title">Poste d'éditeur de contenu — Travel + Leisure Magazine</div>
+      <div class="card-desc">Travel + Leisure (Dotdash Meredith) recrute un Content Update Editor. Poste éditorial dans l'un des plus grands médias voyage du monde.</div>
+      <div class="card-footer">
+        <span class="badge badge-type">Job Éditorial</span>
+      </div>
+    </div>
+    <div class="arrow">→</div>
+  </a>
+
+  <a class="card" href="https://job-boards.greenhouse.io/kasa/jobs/7721821003" target="_blank">
+    <div class="card-icon" style="background:#f5fff8;">🏄</div>
+    <div class="card-body">
+      <div class="card-brand">WeRoad</div>
+      <div class="card-title">Créateur Social Media (Freelance) — Opportunité Travel WeRoad</div>
+      <div class="card-desc">WeRoad, la marque de voyages en groupe, recherche un créateur social media freelance. Voyage + création de contenu sur la route.</div>
+      <div class="card-footer">
+        <span class="badge badge-type">Freelance</span>
+        <span class="badge badge-type">Voyage</span>
+      </div>
+    </div>
+    <div class="arrow">→</div>
+  </a>
+
+  <a class="card" href="https://www.visitfinland.com/en/have-some-finnish/lapland-tasting/" target="_blank">
+    <div class="card-icon" style="background:#f0f8ff;">🇫🇮</div>
+    <div class="card-body">
+      <div class="card-brand">Visit Finland</div>
+      <div class="card-title">Expérience exclusive en Laponie pour créateurs sélectionnés</div>
+      <div class="card-desc">Visit Finland invite des créateurs sélectionnés pour une expérience gastronomique et immersive en Laponie. Places très limitées.</div>
+      <div class="card-footer">
+        <span class="badge badge-deadline">⏰ Deadline juin</span>
+        <span class="badge badge-type">Press Trip</span>
+      </div>
+    </div>
+    <div class="arrow">→</div>
+  </a>
+
+  <a class="card" href="https://www.visitczechia.com/nl-nl/b2b/benelux/press-and-media/press-trips" target="_blank">
+    <div class="card-icon" style="background:#fff5f0;">🇨🇿</div>
+    <div class="card-body">
+      <div class="card-brand">Visit Czech Republic</div>
+      <div class="card-title">Press trip en République Tchèque — Explorer la Bohème</div>
+      <div class="card-desc">CzechTourism propose des collaborations press trip pour les créateurs et journalistes souhaitant découvrir la République Tchèque.</div>
+      <div class="card-footer">
+        <span class="badge badge-type">Press Trip</span>
+      </div>
+    </div>
+    <div class="arrow">→</div>
+  </a>
+
+  <a class="card" href="https://creators.matadornetwork.com/paid-gigs/" target="_blank">
+    <div class="card-icon" style="background:#fff8ee;">🌮</div>
+    <div class="card-body">
+      <div class="card-brand">Matador Network</div>
+      <div class="card-title">Creator Trip au Mexique en juillet — Margaritas, couchers de soleil & été</div>
+      <div class="card-desc">Matador Network organise un creator trip au Mexique en juillet. Missions rémunérées et voyages inclus pour les créateurs sélectionnés.</div>
+      <div class="card-footer">
+        <span class="badge badge-deadline">⏰ Postuler vite</span>
+        <span class="badge badge-type">Creator Trip</span>
+      </div>
+    </div>
+    <div class="arrow">→</div>
+  </a>
+
+  <a class="card" href="https://endangeredrhino.org/vacancies/" target="_blank">
+    <div class="card-icon" style="background:#f5fff5;">🦏</div>
+    <div class="card-body">
+      <div class="card-brand">Endangered Rhino Foundation</div>
+      <div class="card-title">Conservation de la faune — Poste vidéaste pour les rhinocéros</div>
+      <div class="card-desc">Opportunité de créer du contenu vidéo dans le cadre de la conservation des espèces. Travailler avec les rhinocéros et soutenir une mission essentielle.</div>
+      <div class="card-footer">
+        <span class="badge badge-type">Vidéographie</span>
+        <span class="badge badge-type">Conservation</span>
+      </div>
+    </div>
+    <div class="arrow">→</div>
+  </a>
+
+</div>
+
+<!-- CTA CEDRIC -->
+<style>
+  .cedric-block {
+    max-width: 680px;
+    margin: 24px auto 20px;
+    padding: 0 16px;
+  }
+
+  .cedric-card {
+    background: var(--deep);
+    border-radius: 20px;
+    padding: 36px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cedric-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(196,103,74,0.3) 0%, transparent 60%);
+  }
+
+  .cedric-eyebrow {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+    position: relative;
+  }
+
+  .cedric-card h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--sand);
+    font-size: 24px;
+    line-height: 1.3;
+    margin-bottom: 18px;
+    position: relative;
+  }
+
+  .cedric-card .cedric-body {
+    color: #c8b8ae;
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .cedric-card .cedric-body strong {
+    color: var(--sand);
+    font-weight: 500;
+  }
+
+  .cedric-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+    margin: 24px 0;
+    position: relative;
+  }
+
+  .cedric-btn {
+    display: block;
+    background: var(--terracotta);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    padding: 16px 24px;
+    border-radius: 14px;
+    text-decoration: none;
+    text-align: center;
+    position: relative;
+    transition: all 0.2s ease;
+    margin-bottom: 12px;
+  }
+
+  .cedric-btn:hover {
+    background: #b5593e;
+    transform: translateY(-1px);
+  }
+
+  .cedric-btn-secondary {
+    display: block;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--sand);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 16px 24px;
+    border-radius: 14px;
+    text-decoration: none;
+    text-align: center;
+    position: relative;
+    transition: all 0.2s ease;
+  }
+
+  .cedric-btn-secondary:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-1px);
+  }
+
+  .cedric-btn-label {
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.6;
+    display: block;
+    margin-bottom: 4px;
+  }
+</style>
+
+<div class="cedric-block">
+  <div class="cedric-card">
+    <div class="cedric-eyebrow">✦ Un mot de Cédric</div>
+    <h2>Tu postules à des collaborations mais tu ne reçois jamais de réponse ?</h2>
+    <div class="cedric-body">
+      <p>Tu ne sais pas quoi mettre dans ton portfolio ? Comment contacter les marques ? Comment obtenir des collaborations avec des hôtels, restaurants, activités ou marques qui correspondent à ton univers ?</p>
+      <br>
+      <p>J'ai personnellement collaboré avec <strong>plus de 2 000 établissements et marques à travers le monde</strong>, et aidé des centaines de créateurs à décrocher leurs premières collaborations ou à passer au niveau supérieur.</p>
+      <br>
+      <p>La réalité, c'est que la plupart des créateurs ont le potentiel, mais ne savent simplement pas comment se présenter, créer un portfolio professionnel ou pitcher efficacement les marques.</p>
+      <br>
+      <p>C'est exactement pour cela que j'ai créé cette formation 👇</p>
+    </div>
+
+    <a class="cedric-btn" href="https://stan.store/Cedricgmd/p/voyage-gratuitement-grce-aux-collaborations-" target="_blank">
+      <span class="cedric-btn-label">Formation complète</span>
+      🎓 CollabsbyCedric — Découvrir la formation →
+    </a>
+
+    <div class="cedric-divider"></div>
+
+    <div class="cedric-body" style="margin-bottom:20px;">
+      <p>J'ai aussi listé <strong>plus de 1 000 hôtels</strong> avec lesquels j'ai collaboré dans le monde entier — des établissements qui acceptent même les <strong>petits créateurs</strong>. La majorité de ces collaborations ont été obtenues quand j'avais <strong>moins de 1 000 abonnés</strong>.</p>
+      <br>
+      <p>Je te donne accès à cette liste ci-dessous 👇</p>
+    </div>
+
+    <a class="cedric-btn-secondary" href="https://stan.store/Cedricgmd/p/ma-liste-exclusive-de-plus-de-1-000-collaborations-yaoxi5fm" target="_blank">
+      <span class="cedric-btn-label">Liste exclusive</span>
+      🏨 Accéder à ma liste de 1 000+ hôtels collaborants →
+    </a>
+  </div>
+</div>
+
+<footer>
+  Sélectionné par hotels.creators · Juin 2026 · La plupart des deadlines : fin juin sauf mention contraire
+</footer>
+
+</body>
+</html>
