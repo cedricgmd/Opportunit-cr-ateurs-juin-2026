@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="fr" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "DM Sans";
+        src: url("assets/fonts/dm-sans.woff2") format("woff2");
+        font-weight: 100 1000;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Playfair Display";
+        src: url("assets/fonts/playfair-display.woff2") format("woff2");
+        font-weight: 400 900;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Playfair Display";
+        src: url("assets/fonts/playfair-display-italic.woff2") format("woff2");
+        font-weight: 400 900;
+        font-style: italic;
+      }
+      :root {
+        --sand: #f5f0e8;
+        --terracotta: #c4674a;
+        --deep: #1a1410;
+        --warm: #a88b78;
+        --gold: #d4a853;
+        --cream: #faf7f2;
+        --muted: #6b5c52;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: var(--deep);
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        font-family: "DM Sans", sans-serif;
+        color: var(--sand);
+        background: var(--deep);
+        overflow: hidden;
+      }
+      #glow {
+        position: absolute;
+        inset: -200px;
+        background:
+          radial-gradient(ellipse at 30% 45%, rgba(196, 103, 74, 0.32) 0%, transparent 55%),
+          radial-gradient(ellipse at 75% 20%, rgba(212, 168, 83, 0.2) 0%, transparent 50%);
+      }
+      .scene {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0 90px;
+        text-align: center;
+      }
+      .tag {
+        border: 2px solid var(--terracotta);
+        color: var(--terracotta);
+        font-size: 30px;
+        letter-spacing: 8px;
+        text-transform: uppercase;
+        padding: 16px 40px;
+        border-radius: 60px;
+        margin-bottom: 60px;
+      }
+      .serif {
+        font-family: "Playfair Display", serif;
+        font-weight: 700;
+      }
+      .gold {
+        color: var(--gold);
+        font-style: italic;
+        font-weight: 400;
+      }
+      #hero-title {
+        font-size: 150px;
+        line-height: 1.05;
+      }
+      #hero-sub {
+        margin-top: 50px;
+        font-size: 38px;
+        color: var(--warm);
+      }
+      #hook-title {
+        font-size: 104px;
+        line-height: 1.12;
+      }
+      #hook-sub {
+        margin-top: 60px;
+        font-size: 44px;
+        color: var(--warm);
+        line-height: 1.4;
+      }
+      #list-scene {
+        justify-content: flex-start;
+        padding-top: 150px;
+      }
+      #list-label {
+        font-size: 30px;
+        letter-spacing: 6px;
+        text-transform: uppercase;
+        color: var(--terracotta);
+        margin-bottom: 20px;
+      }
+      #list-title {
+        font-size: 84px;
+        margin-bottom: 70px;
+      }
+      .cards {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 26px;
+      }
+      .card {
+        display: flex;
+        align-items: center;
+        gap: 34px;
+        background: var(--cream);
+        color: var(--deep);
+        border-radius: 32px;
+        padding: 26px 34px;
+        text-align: left;
+      }
+      .icon {
+        width: 104px;
+        height: 104px;
+        flex: none;
+        border-radius: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 56px;
+      }
+      .card-body {
+        flex: 1;
+        min-width: 0;
+      }
+      .brand {
+        font-size: 26px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--terracotta);
+        font-weight: 500;
+        margin-bottom: 6px;
+      }
+      .what {
+        font-family: "Playfair Display", serif;
+        font-size: 38px;
+        font-weight: 700;
+        line-height: 1.15;
+      }
+      .badge {
+        flex: none;
+        font-size: 24px;
+        font-weight: 500;
+        padding: 10px 20px;
+        border-radius: 40px;
+        background: #f3e3dc;
+        color: #9a4630;
+      }
+      .badge.ok {
+        background: #e3efe1;
+        color: #3c6b35;
+      }
+      #cta-title {
+        font-size: 120px;
+        line-height: 1.08;
+      }
+      #cta-pill {
+        margin-top: 70px;
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        background: rgba(196, 103, 74, 0.18);
+        border: 2px solid rgba(196, 103, 74, 0.5);
+        color: #f0a088;
+        font-size: 40px;
+        padding: 22px 46px;
+        border-radius: 60px;
+      }
+      .dot {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--terracotta);
+      }
+      #cta-link {
+        margin-top: 90px;
+        font-size: 56px;
+        font-weight: 500;
+        color: var(--deep);
+        background: var(--gold);
+        padding: 30px 70px;
+        border-radius: 80px;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="20"
+      data-width="1080"
+      data-height="1920"
+    >
+      <div id="glow"></div>
+
+      <!-- 1. Hero -->
+      <div id="hero" class="scene clip" data-start="0" data-duration="3.6" data-track-index="0">
+        <div id="hero-tag" class="tag">✈️ Sélection créateurs</div>
+        <h1 id="hero-title" class="serif">
+          <span id="hero-l1" style="display: block">Opportunités</span>
+          <span id="hero-l2" class="gold" style="display: block">Travel</span>
+          <span id="hero-l3" style="display: block">Juin 2026</span>
+        </h1>
+        <p id="hero-sub">Worldwide — Collabs, UGC, Press Trips &amp; Jobs</p>
+      </div>
+
+      <!-- 2. Hook -->
+      <div id="hook" class="scene clip" data-start="3.6" data-duration="3" data-track-index="0">
+        <h2 id="hook-title" class="serif">Tu postules… mais <span class="gold">jamais</span> de&nbsp;réponse&nbsp;?</h2>
+        <p id="hook-sub">Voici 7 opportunités qui recrutent maintenant.</p>
+      </div>
+
+      <!-- 3. Liste -->
+      <div id="list-scene" class="scene clip" data-start="6.6" data-duration="8.6" data-track-index="0">
+        <div id="list-label">📸 En vedette</div>
+        <h2 id="list-title" class="serif">7 opportunités</h2>
+        <div class="cards">
+          <div class="card">
+            <div class="icon" style="background: #fff3ee">🌍</div>
+            <div class="card-body"><div class="brand">Agoda</div><div class="what">Ambassadeur·rice rémunéré·e</div></div>
+            <div class="badge">Fin juin</div>
+          </div>
+          <div class="card">
+            <div class="icon" style="background: #fff0f0">🏡</div>
+            <div class="card-body"><div class="brand">Airbnb</div><div class="what">Affiliation + UGC</div></div>
+            <div class="badge ok">Ongoing</div>
+          </div>
+          <div class="card">
+            <div class="icon" style="background: #fff8ee">☕</div>
+            <div class="card-body"><div class="brand">Hazel Espresso</div><div class="what">Job Social Media</div></div>
+            <div class="badge">Fin juin</div>
+          </div>
+          <div class="card">
+            <div class="icon" style="background: #f0f8ff">🌊</div>
+            <div class="card-body"><div class="brand">Dive the Difference</div><div class="what">Stage surf &amp; plongée</div></div>
+            <div class="badge">Fin juin</div>
+          </div>
+          <div class="card">
+            <div class="icon" style="background: #f5fff5">🐾</div>
+            <div class="card-body"><div class="brand">Unwritten</div><div class="what">UGC chiens &amp; animaux</div></div>
+            <div class="badge">Fin juin</div>
+          </div>
+          <div class="card">
+            <div class="icon" style="background: #fff8f0">🏖️</div>
+            <div class="card-body"><div class="brand">Aubamar Palma</div><div class="what">Séjour luxe à gagner</div></div>
+            <div class="badge">19 juin</div>
+          </div>
+          <div class="card">
+            <div class="icon" style="background: #f5fff8">🌿</div>
+            <div class="card-body"><div class="brand">Glamping plein air</div><div class="what">Photographes &amp; UGC</div></div>
+            <div class="badge">Fin juin</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. CTA -->
+      <div id="cta" class="scene clip" data-start="15.2" data-duration="4.8" data-track-index="0">
+        <h2 id="cta-title" class="serif">Candidate <span class="gold">maintenant</span></h2>
+        <div id="cta-pill"><div id="cta-dot" class="dot"></div>Deadlines : fin juin</div>
+        <div id="cta-link">Tous les liens en bio →</div>
+      </div>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      // Fond qui respire sur toute la durée
+      tl.fromTo("#glow", { scale: 1, x: 0 }, { scale: 1.15, x: 60, duration: 20, ease: "none" }, 0);
+
+      // 1. Hero
+      tl.from("#hero-tag", { opacity: 0, y: 30, duration: 0.5, ease: "power2.out" }, 0.2);
+      tl.from(["#hero-l1", "#hero-l2", "#hero-l3"], { opacity: 0, y: 80, duration: 0.7, stagger: 0.18, ease: "power3.out" }, 0.4);
+      tl.from("#hero-sub", { opacity: 0, y: 20, duration: 0.5 }, 1.3);
+      tl.to("#hero", { opacity: 0, y: -60, duration: 0.4, ease: "power2.in" }, 3.2);
+
+      // 2. Hook
+      tl.from("#hook-title", { opacity: 0, scale: 0.9, duration: 0.6, ease: "back.out(1.6)" }, 3.7);
+      tl.from("#hook-sub", { opacity: 0, y: 30, duration: 0.5 }, 4.5);
+      tl.to("#hook", { opacity: 0, y: -60, duration: 0.4, ease: "power2.in" }, 6.2);
+
+      // 3. Liste
+      tl.from(["#list-label", "#list-title"], { opacity: 0, y: 40, duration: 0.5, stagger: 0.12 }, 6.7);
+      tl.from(".card", { opacity: 0, x: 140, duration: 0.55, stagger: 0.55, ease: "power3.out" }, 7.3);
+      tl.to("#list-scene", { opacity: 0, y: -60, duration: 0.4, ease: "power2.in" }, 14.8);
+
+      // 4. CTA
+      tl.from("#cta-title", { opacity: 0, y: 60, duration: 0.7, ease: "power3.out" }, 15.3);
+      tl.from("#cta-pill", { opacity: 0, scale: 0.8, duration: 0.5, ease: "back.out(1.8)" }, 16);
+      tl.fromTo("#cta-dot", { scale: 1 }, { scale: 1.5, duration: 0.5, yoyo: true, repeat: 5, ease: "sine.inOut" }, 16.5);
+      tl.from("#cta-link", { opacity: 0, y: 40, duration: 0.6, ease: "power3.out" }, 16.6);
+      tl.to("#cta-link", { scale: 1.06, duration: 0.4, yoyo: true, repeat: 3, ease: "sine.inOut" }, 17.5);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
