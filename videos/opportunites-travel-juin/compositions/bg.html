@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+        }
+
+        #bg-glow-a, #bg-glow-b, #bg-glow-c { position: absolute; border-radius: 50%; will-change: transform, opacity; }
+        #bg-glow-a { width: 1500px; height: 1500px; left: -620px; top: 260px;
+          background: radial-gradient(circle, rgba(196,103,74,0.42) 0%, rgba(196,103,74,0) 62%); }
+        #bg-glow-b { width: 1200px; height: 1200px; left: 380px; top: -360px;
+          background: radial-gradient(circle, rgba(212,168,83,0.26) 0%, rgba(212,168,83,0) 60%); }
+        #bg-glow-c { width: 1300px; height: 1300px; left: 260px; top: 1180px;
+          background: radial-gradient(circle, rgba(196,103,74,0.22) 0%, rgba(196,103,74,0) 60%); }
+        #bg-ghost-wrap { position: absolute; left: 640px; top: 0; width: 1920px; height: 440px;
+          transform-origin: 0 0; rotate: 90deg; }
+        #bg-ghost { font-family: "Playfair Display", serif; font-style: italic; font-weight: 900;
+          font-size: 400px; line-height: 440px; white-space: nowrap; color: rgba(196,103,74,0.13); }
+        #bg-frame { position: absolute; inset: 48px; border: 2px solid rgba(245,240,232,0.12); border-radius: 36px; }
+        .bg-meta { position: absolute; font-size: 22px; font-weight: 500; letter-spacing: 5px;
+          text-transform: uppercase; color: rgba(245,240,232,0.62); }
+        #bg-meta-tl { left: 96px; top: 96px; }
+        #bg-meta-tr { right: 96px; top: 96px; }
+        #bg-meta-bl { left: 96px; bottom: 96px; }
+        #bg-meta-br { right: 96px; bottom: 96px; color: var(--gold); }
+        #bg-progress-track { position: absolute; left: 96px; right: 96px; top: 150px; height: 4px;
+          background: rgba(245,240,232,0.1); border-radius: 2px; overflow: hidden; }
+        #bg-progress { width: 100%; height: 100%; background: var(--terracotta); transform-origin: 0 50%; }
+      </style>
+      <div id="root" data-composition-id="bg" data-width="1080" data-height="1920">
+        <div id="bg-glow-a"></div>
+        <div id="bg-glow-b"></div>
+        <div id="bg-glow-c"></div>
+        <div id="bg-ghost-wrap" data-layout-ignore aria-hidden="true"><div id="bg-ghost" data-layout-ignore aria-hidden="true">Travel · Collabs · UGC</div></div>
+        <div id="bg-frame"></div>
+        <div class="bg-meta" id="bg-meta-tl">Opportunités Travel</div>
+        <div class="bg-meta" id="bg-meta-tr">06 / 2026</div>
+        <div class="bg-meta" id="bg-meta-bl">Worldwide</div>
+        <div class="bg-meta" id="bg-meta-br">hotels.creators</div>
+        <div id="bg-progress-track"><div id="bg-progress"></div></div>
+      </div>
+      <script>
+        (function () {
+        const tl = gsap.timeline({ paused: true });
+
+        const F = 1 / 30;
+        // Waterfall arrival: binary reveal + whip up from below.
+        function waterfall(items, t) {
+          items.forEach(([sel, y, dur]) => {
+            tl.set(sel, { opacity: 1, y: y }, t);
+            tl.to(sel, { y: 0, duration: dur, ease: "power4.out" }, t);
+            t += dur - F;
+          });
+          return t;
+        }
+        function hide(sels) { sels.forEach((s) => tl.set(s, { opacity: 0 }, 0)); }
+        function fmt(n) { return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " "); }
+
+        const TOTAL = 25;
+        tl.fromTo("#bg-progress", { scaleX: 0 }, { scaleX: 1, duration: TOTAL, ease: "none" }, 0);
+        tl.fromTo("#bg-glow-a", { scale: 0.9, x: 0 }, { scale: 1.12, x: 80, duration: 3.2, ease: "sine.inOut", yoyo: true, repeat: Math.max(0, Math.floor(TOTAL / 3.2) - 1) }, 0);
+        tl.fromTo("#bg-glow-b", { scale: 1.05, opacity: 0.8 }, { scale: 0.88, opacity: 1, duration: 2.6, ease: "sine.inOut", yoyo: true, repeat: Math.max(0, Math.floor(TOTAL / 2.6) - 1) }, 0);
+        tl.fromTo("#bg-glow-c", { scale: 0.95, y: 0 }, { scale: 1.1, y: -90, duration: 4, ease: "sine.inOut", yoyo: true, repeat: Math.max(0, Math.floor(TOTAL / 4) - 1) }, 0);
+        tl.fromTo("#bg-ghost", { x: 0 }, { x: -420, duration: TOTAL, ease: "none" }, 0);
+        tl.fromTo("#bg-frame", { opacity: 0, scale: 1.03 }, { opacity: 1, scale: 1, duration: 0.8, ease: "power3.out" }, 0);
+        tl.fromTo(".bg-meta", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power2.out", stagger: 0.08 }, 0.2);
+        window.__timelines["bg"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

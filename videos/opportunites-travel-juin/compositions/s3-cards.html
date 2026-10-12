@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: 0 96px;
+        }
+
+        #s3-wrap { padding-top: 230px; height: 100%; }
+        #s3-head { display: flex; align-items: flex-end; gap: 30px; margin-top: 22px; }
+        #s3-count-wrap { width: 250px; display: flex; justify-content: flex-start; }
+        #s3-count { display: inline-block; font-family: "Playfair Display", serif; font-weight: 900; font-style: italic;
+          font-size: 230px; line-height: 0.9; color: var(--gold); font-variant-numeric: tabular-nums; transform-origin: 0% 100%; }
+        #s3-head-words { font-family: "Playfair Display", serif; font-size: 70px; font-weight: 700; line-height: 1.08; padding-bottom: 14px; }
+        #s3-cards { display: flex; flex-direction: column; gap: 30px; margin-top: 70px; }
+        .s3-card { display: flex; align-items: center; gap: 30px; background: var(--cream); border-radius: 30px;
+          padding: 40px 38px; color: var(--deep); box-shadow: 0 24px 60px rgba(0,0,0,0.35); will-change: transform; }
+        .s3-num { flex-shrink: 0; width: 88px; height: 88px; border-radius: 24px; display: flex; align-items: center;
+          justify-content: center; background: var(--deep); color: var(--gold); font-family: "Playfair Display", serif;
+          font-style: italic; font-weight: 700; font-size: 40px; }
+        .s3-body { flex: 1; min-width: 0; }
+        .s3-brand { font-size: 24px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); }
+        .s3-title { font-family: "Playfair Display", serif; font-weight: 700; font-size: 46px; line-height: 1.15; margin-top: 8px; }
+        .s3-badge { flex-shrink: 0; font-size: 22px; font-weight: 700; letter-spacing: 1px; padding: 10px 20px;
+          border-radius: 30px; background: #fbe7df; color: var(--terracotta-dark); }
+      </style>
+      <div id="root" data-composition-id="s3-cards" data-width="1080" data-height="1920">
+        <div id="s3-wrap">
+        <div class="eyebrow" id="s3-label">Ce mois-ci · Worldwide</div>
+        <div id="s3-head">
+          <div id="s3-count-wrap"><span id="s3-count">0</span></div>
+          <div id="s3-head-words">
+            <span class="line" id="s3-w1">opportunités</span>
+            <span class="line" id="s3-w2">à saisir</span>
+          </div>
+        </div>
+        <div id="s3-cards">
+          <div class="s3-card"><div class="s3-num">01</div><div class="s3-body"><div class="s3-brand">Agoda</div><div class="s3-title">Ambassadeur rémunéré</div></div><div class="s3-badge">Fin juin</div></div>
+          <div class="s3-card"><div class="s3-num">02</div><div class="s3-body"><div class="s3-brand">Airbnb</div><div class="s3-title">UGC + affiliation payés</div></div><div class="s3-badge">Ongoing</div></div>
+          <div class="s3-card"><div class="s3-num">03</div><div class="s3-body"><div class="s3-brand">Visit Finland</div><div class="s3-title">Expérience en Laponie</div></div><div class="s3-badge">Press trip</div></div>
+          <div class="s3-card"><div class="s3-num">04</div><div class="s3-body"><div class="s3-brand">Matador Network</div><div class="s3-title">Creator trip au Mexique</div></div><div class="s3-badge">Juillet</div></div>
+          <div class="s3-card"><div class="s3-num">05</div><div class="s3-body"><div class="s3-brand">Ori Magazine</div><div class="s3-title">Bourse de 5 000 $</div></div><div class="s3-badge">Bourse</div></div>
+        </div>
+        </div>
+      </div>
+      <script>
+        (function () {
+        const tl = gsap.timeline({ paused: true });
+
+        const F = 1 / 30;
+        // Waterfall arrival: binary reveal + whip up from below.
+        function waterfall(items, t) {
+          items.forEach(([sel, y, dur]) => {
+            tl.set(sel, { opacity: 1, y: y }, t);
+            tl.to(sel, { y: 0, duration: dur, ease: "power4.out" }, t);
+            t += dur - F;
+          });
+          return t;
+        }
+        function hide(sels) { sels.forEach((s) => tl.set(s, { opacity: 0 }, 0)); }
+        function fmt(n) { return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " "); }
+
+        hide(["#s3-w1", "#s3-w2"]);
+        tl.fromTo("#s3-label", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 0.05);
+        const c3 = { v: 0 };
+        const countEl = document.getElementById("s3-count");
+        tl.fromTo(c3, { v: 0 }, { v: 23, duration: 1.3, ease: "power3.out", onUpdate: () => { countEl.textContent = Math.round(c3.v); } }, 0.15);
+        tl.fromTo("#s3-count", { scale: 0.5 }, { scale: 1, duration: 1.3, ease: "power3.out" }, 0.15);
+        waterfall([["#s3-w1", 60, 0.2], ["#s3-w2", 45, 0.16]], 0.45);
+        const cards = gsap.utils.toArray("#s3-cards .s3-card");
+        cards.forEach((el, i) => {
+          tl.fromTo(el, { x: 160, opacity: 0, rotation: 2 }, { x: 0, opacity: 1, rotation: 0, duration: 0.6, ease: "power3.out" }, 1.0 + i * 0.1);
+          tl.fromTo(el.querySelector(".s3-badge"), { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "power3.out" }, 1.45 + i * 0.1);
+        });
+        tl.fromTo("#s3-cards", { y: 0 }, { y: -40, duration: 4.8, ease: "sine.inOut" }, 1.0);
+        // Highlight sweep down the stack: each card lifts briefly in turn.
+        cards.forEach((el, i) => {
+          tl.fromTo(el, { scale: 1 }, { scale: 1.035, duration: 0.25, ease: "power2.out", immediateRender: false }, 2.6 + i * 0.45);
+          tl.to(el, { scale: 1, duration: 0.35, ease: "power2.inOut" }, 2.85 + i * 0.45);
+        });
+        tl.to(["#s3-label", "#s3-head"], { opacity: 0, y: -60, duration: 0.35, ease: "power3.in" }, 5.95);
+        tl.to(cards, { x: -180, opacity: 0, duration: 0.35, ease: "power3.in", stagger: 0.04 }, 5.95);
+        window.__timelines["s3-cards"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

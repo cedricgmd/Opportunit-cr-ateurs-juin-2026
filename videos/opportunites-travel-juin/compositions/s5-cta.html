@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: 0 96px;
+        }
+
+        #s5-stack { display: flex; flex-direction: column; align-items: center; text-align: center; }
+        #s5-a { font-size: 104px; font-weight: 700; line-height: 1.1; }
+        #s5-b { font-size: 190px; font-weight: 700; line-height: 1.05; }
+        #s5-btn { margin-top: 90px; display: inline-flex; align-items: center; gap: 26px; background: var(--terracotta);
+          color: #ffffff; font-size: 46px; font-weight: 700; letter-spacing: 0.5px; padding: 40px 64px; border-radius: 36px;
+          box-shadow: 0 30px 70px rgba(196,103,74,0.45); will-change: transform; }
+        #s5-bio { margin-top: 64px; display: flex; flex-direction: column; align-items: center; gap: 18px; font-size: 34px;
+          font-weight: 500; letter-spacing: 6px; text-transform: uppercase; color: var(--body); }
+        #s5-arrow { display: block; }
+        #s5-sign { margin-top: 90px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        #s5-sign-a { font-size: 30px; font-weight: 500; letter-spacing: 3px; color: rgba(245,240,232,0.7); }
+        #s5-sign-b { font-family: "Playfair Display", serif; font-style: italic; font-size: 52px; color: var(--gold); }
+      </style>
+      <div id="root" data-composition-id="s5-cta" data-width="1080" data-height="1920">
+        <div id="s5-stack">
+        <h2 class="serif">
+          <span class="line" id="s5-a">Les deadlines tombent</span>
+          <span class="line gold-italic" id="s5-b">fin juin.</span>
+        </h2>
+        <div id="s5-btn">
+          Découvre les 23 opportunités
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </div>
+        <div id="s5-bio">
+          Lien en bio
+          <svg id="s5-arrow" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8896e" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M6 14l6 6 6-6"/></svg>
+        </div>
+        <div id="s5-sign">
+          <div id="s5-sign-a">hotels.creators</div>
+          <div id="s5-sign-b">CollabsbyCedric</div>
+        </div>
+        </div>
+      </div>
+      <script>
+        (function () {
+        const tl = gsap.timeline({ paused: true });
+
+        const F = 1 / 30;
+        // Waterfall arrival: binary reveal + whip up from below.
+        function waterfall(items, t) {
+          items.forEach(([sel, y, dur]) => {
+            tl.set(sel, { opacity: 1, y: y }, t);
+            tl.to(sel, { y: 0, duration: dur, ease: "power4.out" }, t);
+            t += dur - F;
+          });
+          return t;
+        }
+        function hide(sels) { sels.forEach((s) => tl.set(s, { opacity: 0 }, 0)); }
+        function fmt(n) { return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " "); }
+
+        hide(["#s5-a", "#s5-b"]);
+        waterfall([["#s5-a", 70, 0.22], ["#s5-b", 90, 0.26]], 0.1);
+        tl.fromTo("#s5-btn", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "power3.out" }, 0.8);
+        tl.to("#s5-btn", { scale: 0.93, duration: 0.12, ease: "none" }, 2.0);
+        tl.to("#s5-btn", { scale: 1, duration: 0.5, ease: "elastic.out(1, 0.45)" }, 2.12);
+        tl.fromTo("#s5-bio", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 1.2);
+        tl.fromTo("#s5-arrow", { y: 0 }, { y: 16, duration: 0.45, ease: "sine.inOut", yoyo: true, repeat: 5 }, 1.7);
+        tl.fromTo("#s5-sign", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 1.6);
+        tl.fromTo("#s5-b", { scale: 1 }, { scale: 1.05, duration: 4, ease: "sine.inOut" }, 0.6);
+        window.__timelines["s5-cta"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

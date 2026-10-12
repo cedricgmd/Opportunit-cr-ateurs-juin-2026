@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="fr" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Opportunités Travel — Juin 2026</title>
+    <script src="vendor/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "DM Sans"; font-weight: 300; font-style: normal; src: url("fonts/dm-sans-latin-300-normal.woff2") format("woff2"); }
+      @font-face { font-family: "DM Sans"; font-weight: 400; font-style: normal; src: url("fonts/dm-sans-latin-400-normal.woff2") format("woff2"); }
+      @font-face { font-family: "DM Sans"; font-weight: 500; font-style: normal; src: url("fonts/dm-sans-latin-500-normal.woff2") format("woff2"); }
+      @font-face { font-family: "DM Sans"; font-weight: 700; font-style: normal; src: url("fonts/dm-sans-latin-700-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Playfair Display"; font-weight: 400; font-style: normal; src: url("fonts/playfair-display-latin-400-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Playfair Display"; font-weight: 700; font-style: normal; src: url("fonts/playfair-display-latin-700-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Playfair Display"; font-weight: 900; font-style: normal; src: url("fonts/playfair-display-latin-900-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Playfair Display"; font-weight: 400; font-style: italic; src: url("fonts/playfair-display-latin-400-italic.woff2") format("woff2"); }
+      @font-face { font-family: "Playfair Display"; font-weight: 700; font-style: italic; src: url("fonts/playfair-display-latin-700-italic.woff2") format("woff2"); }
+      @font-face { font-family: "Playfair Display"; font-weight: 900; font-style: italic; src: url("fonts/playfair-display-latin-900-italic.woff2") format("woff2"); }
+
+      :root {
+        --deep: #1a1410;
+        --sand: #f5f0e8;
+        --cream: #faf7f2;
+        --terracotta: #c4674a;
+        --terracotta-light: #e8896e;
+        --terracotta-dark: #a54e33;
+        --gold: #d4a853;
+        --body: #c8b8ae;
+        --muted: #6b5c52;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--deep); }
+      #main-root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: var(--deep);
+        color: var(--sand);
+        font-family: "DM Sans", sans-serif;
+        font-weight: 400;
+      }
+      #main-root > div { position: absolute; inset: 0; }
+      .serif { font-family: "Playfair Display", serif; }
+      .gold-italic { font-family: "Playfair Display", serif; font-style: italic; color: var(--gold); }
+      .eyebrow { font-size: 26px; font-weight: 500; letter-spacing: 7px; text-transform: uppercase; color: var(--terracotta-light); }
+      .line { display: block; will-change: transform; }
+    </style>
+  </head>
+  <body>
+    <div id="main-root" data-composition-id="main" data-start="0" data-duration="25" data-width="1080" data-height="1920">
+      <div id="bg" data-composition-id="bg" data-composition-src="compositions/bg.html" data-start="0" data-duration="25" data-track-index="0" data-width="1080" data-height="1920"></div>
+      <div id="s1-hook" data-composition-id="s1-hook" data-composition-src="compositions/s1-hook.html" data-start="0" data-duration="3.6" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <div id="s2-title" data-composition-id="s2-title" data-composition-src="compositions/s2-title.html" data-start="3.6" data-duration="4.4" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <div id="s3-cards" data-composition-id="s3-cards" data-composition-src="compositions/s3-cards.html" data-start="8" data-duration="6.4" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <div id="s4-stats" data-composition-id="s4-stats" data-composition-src="compositions/s4-stats.html" data-start="14.4" data-duration="5.6" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <div id="s5-cta" data-composition-id="s5-cta" data-composition-src="compositions/s5-cta.html" data-start="20" data-duration="5" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <div id="grain" data-composition-id="grain" data-composition-src="compositions/grain.html" data-start="0" data-duration="25" data-track-index="2" data-width="1080" data-height="1920"></div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
